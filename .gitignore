@@ -130,4 +130,4 @@ dist
 .idea
 
 # Config
-config/
+src/config.ts
