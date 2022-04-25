@@ -9,10 +9,12 @@
     "start:local": "nodemon index.ts"
   },
   "dependencies": {
+    "@discordjs/rest": "^0.4.1",
     "discord.js": "^13.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
-    "ts-node": "^10.7.0"
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
   }
 }
