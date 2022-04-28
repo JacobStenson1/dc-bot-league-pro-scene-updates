@@ -1,14 +1,12 @@
 import { Client, Interaction } from 'discord.js';
-import { SlashCommandBuilder } from '@discordjs/builders';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { clientId, TEST_guildId, token } from './config';
-import editInteractionReply from './utils/functions/editInteractionReply';
-import leagues from './utils/api/leagues';
+import { gamesCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
+import { gamesCommandHandler, leaguesCommandHandler } from './commands/handlers';
 
 export default class DiscordBot {
     client;
-    SlashCommandBuilder = SlashCommandBuilder;
     rest = new REST({version: '9'}).setToken(token);
     Routes = Routes;
     clientId = clientId;
@@ -25,16 +23,8 @@ export default class DiscordBot {
 
     async setupCommands() {
         const commands = [
-            new this.SlashCommandBuilder()
-                .setName('games')
-                .setDescription('Returns all the current league games')
-                .addStringOption(option =>
-                    option.setName('league')
-                        .setDescription('What league?')
-                        .setRequired(false)),
-            new this.SlashCommandBuilder()
-                .setName('leagues')
-                .setDescription('Return all leagues')
+            gamesCommandDefinition,
+            leaguesCommandDefinition
         ].map(command => command.toJSON());
 
         await this.rest.put(
@@ -51,18 +41,15 @@ export default class DiscordBot {
 
         await interaction.deferReply();
 
-        if (interaction.commandName === 'leagues') {
-
-            const allLeagues = await leagues();
-
-            console.log('allGames');
-            console.log(allLeagues);
-
-            allLeagues.data.leagues.length = 5;
-
-            await editInteractionReply(interaction, JSON.stringify(allLeagues.data.leagues));
+        switch (interaction.commandName) {
+            case 'leagues':
+                return await leaguesCommandHandler(interaction);
+            case 'games':
+                return await gamesCommandHandler(interaction)
         }
 
         console.log('Interaction entered');
+
+        return false;
     }
 };

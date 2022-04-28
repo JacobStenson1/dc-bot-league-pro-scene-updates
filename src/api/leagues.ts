@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { apiKey } from '../../config';
+import { apiKey } from '../config';
 
 const getAllLeagues = async () => {
     var requestOptions = {
