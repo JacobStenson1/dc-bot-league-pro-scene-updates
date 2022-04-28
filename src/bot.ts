@@ -2,8 +2,8 @@ import { Client, Interaction } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { clientId, TEST_guildId, token } from './config';
-import { gamesCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
 import { gamesCommandHandler, leaguesCommandHandler } from './commands/handlers';
+import { gamesCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
 
 export default class DiscordBot {
     client;
@@ -43,13 +43,15 @@ export default class DiscordBot {
 
         switch (interaction.commandName) {
             case 'leagues':
-                return await leaguesCommandHandler(interaction);
+                await leaguesCommandHandler(interaction);
+                break;
             case 'games':
-                return await gamesCommandHandler(interaction)
+                await gamesCommandHandler(interaction)
+                break;
         }
 
         console.log('Interaction entered');
 
-        return false;
+        return;
     }
 };
