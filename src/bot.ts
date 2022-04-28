@@ -2,8 +2,8 @@ import { Client, Interaction } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { clientId, TEST_guildId, token } from './config';
-import { gamesCommandHandler, leaguesCommandHandler } from './commands/handlers';
-import { gamesCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
+import { gamesCommandDefinition, gamesTodayCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
+import { gamesCommandHandler, gamesTodayCommandHandler, leaguesCommandHandler } from './commands/handlers';
 
 export default class DiscordBot {
     client;
@@ -24,7 +24,8 @@ export default class DiscordBot {
     async setupCommands() {
         const commands = [
             gamesCommandDefinition,
-            leaguesCommandDefinition
+            leaguesCommandDefinition,
+            gamesTodayCommandDefinition
         ].map(command => command.toJSON());
 
         await this.rest.put(
@@ -46,7 +47,10 @@ export default class DiscordBot {
                 await leaguesCommandHandler(interaction);
                 break;
             case 'games':
-                await gamesCommandHandler(interaction)
+                await gamesCommandHandler(interaction);
+                break;
+            case 'games_today':
+                await gamesTodayCommandHandler(interaction);
                 break;
         }
 

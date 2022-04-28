@@ -6,4 +6,4 @@ export default new SlashCommandBuilder()
     .addStringOption(option =>
         option.setName('league')
             .setDescription('What league?')
-            .setRequired(false))
+            .setRequired(false));
