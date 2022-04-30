@@ -33,7 +33,7 @@ export interface Match {
     strategy: Strategy;
 }
 
-export interface Game {
+export interface ScheduleGame {
     startTime: Date;
     state: string;
     type: string;
