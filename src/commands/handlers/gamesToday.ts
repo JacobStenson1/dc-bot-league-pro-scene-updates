@@ -11,13 +11,7 @@ export default async (interaction: CommandInteraction) => {
 
     const leagueGames = await getAllGamesForLeague(leagueId);
 
-    console.log("leagueGames");
-    console.log(leagueGames);
-
     const gamesToday = getItemsToday(leagueGames.data.schedule.events, 'startTime')
-
-    console.log("gamesToday");
-    console.log(gamesToday);
 
     return editInteractionReply(interaction, JSON.stringify(gamesToday));
 }
