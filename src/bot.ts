@@ -29,7 +29,7 @@ export default class DiscordBot {
         ].map(command => command.toJSON());
 
         await this.rest.put(
-            this.Routes.applicationGuildCommands(this.clientId, this.guildId),
+            this.Routes.applicationCommands(this.clientId),
             {body: commands}
         );
 
