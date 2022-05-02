@@ -6,8 +6,7 @@
   "author": "Jacob Stenson <jacob@nosnets.co.uk>",
   "license": "MIT",
   "scripts": {
-    "start": "node build/index.js",
-    "postinstall": "tsc",
+    "start": "tsc && node build/index.js",
     "start:local": "nodemon index.ts"
   },
   "dependencies": {
