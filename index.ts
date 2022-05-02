@@ -1,6 +1,10 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 import { Client, Intents } from 'discord.js';
-import { token } from './src/config';
 import DiscordBot from './src/bot';
+import { token } from './src/config';
 
 const client = new Client({intents: [Intents.FLAGS.GUILD_MESSAGES]});
 

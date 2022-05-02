@@ -6,11 +6,14 @@
   "author": "Jacob Stenson <jacob@nosnets.co.uk>",
   "license": "MIT",
   "scripts": {
+    "start": "node build/index.js",
+    "postinstall": "tsc",
     "start:local": "nodemon index.ts"
   },
   "dependencies": {
     "@discordjs/rest": "^0.4.1",
     "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
     "moment": "^2.29.3"
   },
   "devDependencies": {
