@@ -128,3 +128,6 @@ dist
 
 
 .idea
+
+# Config
+src/config.ts
