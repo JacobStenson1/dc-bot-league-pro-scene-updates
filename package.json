@@ -13,11 +13,11 @@
     "@discordjs/rest": "^0.4.1",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
-    "moment": "^2.29.3"
+    "moment": "^2.29.3",
+    "typescript": "^4.6.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
-    "ts-node": "^10.7.0",
-    "typescript": "^4.6.3"
+    "ts-node": "^10.7.0"
   }
 }
