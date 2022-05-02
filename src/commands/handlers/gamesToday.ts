@@ -17,13 +17,18 @@ export default async (interaction: CommandInteraction) => {
     const gamesToday = getItemsToday(leagueGames.data.schedule.events, 'startTime') as ScheduleGame[];
 
     let gamesTodayString = `League pro games today for League ID: ${leagueId}:\n\n`;
+
+    if (gamesToday.length === 0) {
+        return editInteractionReply(interaction, gamesTodayString + 'No games today.');
+    }
+
     for (const game of gamesToday) {
         console.log(game);
         gamesTodayString +=
             `Start time: ${moment(game.startTime).format('DD/MM/YYYY HH:mm')}\n` +
-            `League: ${game.league.name}\n`+
-            `Teams: ${game?.match?.teams?.map((team) => team.name).join(' & ') ?? '?Found no teams?'}\n`+
-            `\n`
+            `League: ${game.league.name}\n` +
+            `Teams: ${game?.match?.teams?.map((team) => team.name).join(' & ') ?? '?Found no teams?'}\n` +
+            `\n`;
     }
 
     return editInteractionReply(interaction, gamesTodayString);
