@@ -131,3 +131,6 @@ dist
 
 # Config
 src/config.ts
+
+
+/build

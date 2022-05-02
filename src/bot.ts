@@ -1,16 +1,16 @@
 import { Client, Interaction } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
-import { clientId, TEST_guildId, token } from './config';
 import { gamesCommandDefinition, gamesTodayCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
 import { gamesCommandHandler, gamesTodayCommandHandler, leaguesCommandHandler } from './commands/handlers';
+import { clientId, guildId, token } from './config';
 
 export default class DiscordBot {
     client;
     rest = new REST({version: '9'}).setToken(token);
     Routes = Routes;
     clientId = clientId;
-    guildId = TEST_guildId;
+    guildId = guildId;
 
     constructor(client: Client) {
         this.client = client;
