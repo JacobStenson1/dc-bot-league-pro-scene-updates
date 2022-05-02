@@ -31,7 +31,7 @@
     // "useDefineForClassFields": true,                  /* Emit ECMAScript-standard-compliant class fields. */
 
     /* Modules */
-    "module": "ESNext"
+    "module": "commonjs"
     /* Specify what module code is generated. */,
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "node"
