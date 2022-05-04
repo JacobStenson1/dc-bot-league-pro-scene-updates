@@ -3,7 +3,8 @@ import { getAllGamesForLeague } from '../../api/games';
 import { CommandInteraction } from 'discord.js';
 import getItemsToday from '../../utils/functions/getItemsToday';
 import { ScheduleGame } from '../../utils/types/interfaces/scheduleGame';
-import moment from 'moment';
+// import moment from 'moment';
+import momentTz from 'moment-timezone';
 
 export default async (interaction: CommandInteraction) => {
 
@@ -23,9 +24,12 @@ export default async (interaction: CommandInteraction) => {
     }
 
     for (const game of gamesToday) {
-        console.log(game);
+        const gameTime = momentTz.utc(game.startTime);
+        const gameTimeGmtFormat = gameTime.format('DD/MM/YYYY HH:mm');
+        const gameTimeBstFormat = gameTime.tz('Europe/London').format('DD/MM/YYYY HH:mm');
+
         gamesTodayString +=
-            `Start time: ${moment(game.startTime).format('DD/MM/YYYY HH:mm')}\n` +
+            `Start time: ${gameTimeGmtFormat} (GMT) - ${gameTimeBstFormat} (London)\n` +
             `League: ${game.league.name}\n` +
             `Teams: ${game?.match?.teams?.map((team) => team.name).join(' & ') ?? '?Found no teams?'}\n` +
             `\n`;
