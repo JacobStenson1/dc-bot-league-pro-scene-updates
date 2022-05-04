@@ -4,6 +4,8 @@ import { Routes } from 'discord-api-types/v9';
 import { gamesCommandDefinition, gamesTodayCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
 import { gamesCommandHandler, gamesTodayCommandHandler, leaguesCommandHandler } from './commands/handlers';
 import { clientId, guildId, token } from './config';
+import { leaguesNextPage, leaguesPreviousPage } from './constants/buttons/pagination';
+import { leaguesPaginationHandler } from './commands/handlers/leagues';
 
 export default class DiscordBot {
     client;
@@ -37,7 +39,16 @@ export default class DiscordBot {
     }
 
     async onInteraction(interaction: Interaction) {
+        console.log('Interaction entered');
+
+
         // If interaction is not a command then ignore
+        if(interaction.isButton()){
+            if(interaction.customId === leaguesNextPage || interaction.customId === leaguesPreviousPage){
+                await leaguesPaginationHandler(interaction);
+            }
+        }
+
         if (!interaction.isCommand()) return;
 
         await interaction.deferReply();
@@ -54,7 +65,6 @@ export default class DiscordBot {
                 break;
         }
 
-        console.log('Interaction entered');
 
         return;
     }
