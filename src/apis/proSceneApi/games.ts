@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
-import { apiKey } from '../config';
+import { apiKey } from '../../config';
 
-const getAllLeagues = async () => {
+export const getAllGamesForLeague = async (leagueId: string) => {
     var requestOptions = {
         method: 'GET',
         headers: {
@@ -9,10 +9,8 @@ const getAllLeagues = async () => {
         },
     };
 
-    return await fetch('https://esports-api.lolesports.com/persisted/gw/getLeagues?hl=en-US', requestOptions)
+    return await fetch(`https://esports-api.lolesports.com/persisted/gw/getSchedule?hl=en-US&leagueId=${leagueId}`, requestOptions)
         .then(response => response.json())
         .then(result => result)
         .catch(error => console.log('error', error));
-};
-
-export default getAllLeagues;
+}

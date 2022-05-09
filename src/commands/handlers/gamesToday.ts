@@ -1,5 +1,5 @@
-import editInteractionReply from '../../functions/editInteractionReply';
-import { getAllGamesForLeague } from '../../api/games';
+import editInteractionReply from '../../utils/functions/editInteractionReply';
+import { getAllGamesForLeague } from '../../apis/proSceneApi/games';
 import { CommandInteraction } from 'discord.js';
 import getItemsToday from '../../utils/functions/getItemsToday';
 import { ScheduleGame } from '../../utils/types/interfaces/scheduleGame';

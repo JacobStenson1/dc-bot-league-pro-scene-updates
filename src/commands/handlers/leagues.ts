@@ -1,5 +1,5 @@
-import leagues from '../../api/leagues';
-import editInteractionReply from '../../functions/editInteractionReply';
+import leagues from '../../apis/proSceneApi/leagues';
+import editInteractionReply from '../../utils/functions/editInteractionReply';
 import { CommandInteraction } from 'discord.js';
 
 export default async (interaction: CommandInteraction) => {
