@@ -11,9 +11,9 @@ export default async (interaction: CommandInteraction) => {
     for (const league of allLeagues.data.leagues) {
         leaguesString +=
             `Name: ${league.name}\n` +
-            `Region: ${league.region}\n`+
-            `Id: ${league.id}\n`+
-            `\n`
+            `Region: ${league.region}\n` +
+            `Id: ${league.id}\n` +
+            `\n`;
     }
 
     return await editInteractionReply(interaction, leaguesString);

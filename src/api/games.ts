@@ -13,4 +13,4 @@ export const getAllGamesForLeague = async (leagueId: string) => {
         .then(response => response.json())
         .then(result => result)
         .catch(error => console.log('error', error));
-}
+};
