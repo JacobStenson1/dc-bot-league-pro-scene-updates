@@ -3,7 +3,7 @@ import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { gamesCommandDefinition, gamesTodayCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
 import { gamesCommandHandler, gamesTodayCommandHandler, leaguesCommandHandler } from './commands/handlers';
-import { clientId, guildId, token } from './config';
+import { clientId, guildId, IS_DEV, token } from './config';
 
 export default class DiscordBot {
     client;
@@ -22,18 +22,28 @@ export default class DiscordBot {
     }
 
     async setupCommands() {
+        console.log('Setting up commands');
+
         const commands = [
             gamesCommandDefinition,
             leaguesCommandDefinition,
             gamesTodayCommandDefinition
         ].map(command => command.toJSON());
 
-        await this.rest.put(
-            this.Routes.applicationCommands(this.clientId),
-            {body: commands}
-        );
+        if (IS_DEV) {
+            await this.rest.put(
+                this.Routes.applicationGuildCommands(this.clientId, this.guildId),
+                {body: commands}
+            );
+            console.log('Successfully reloaded Guild (/) commands.');
 
-        console.log('Successfully reloaded application (/) commands.');
+        } else {
+            await this.rest.put(
+                this.Routes.applicationCommands(this.clientId),
+                {body: commands}
+            );
+            console.log('Successfully reloaded Global (/) commands.');
+        }
     }
 
     async onInteraction(interaction: Interaction) {
