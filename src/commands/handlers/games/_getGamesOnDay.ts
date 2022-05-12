@@ -3,18 +3,14 @@ import { ScheduleGame } from '../../../utils/types/interfaces/scheduleGame';
 import momentTz, { Moment } from 'moment-timezone';
 import getItemsSpecificDate from '../../../utils/functions/getItemsSpecificDate';
 
-export default async (leagueId, date: Moment ) => {
+export default async (leagueId, date: Moment) => {
     const leagueGames = await getAllGamesForLeague(leagueId);
 
     // Get the games today, must use "as ScheduleGame[]" as function is a util function and wont return the correct type
     const gamesToday = getItemsSpecificDate(leagueGames.data.schedule.events, 'startTime', date) as ScheduleGame[];
 
-    console.log("gamesToday");
-    console.log(gamesToday);
-
-
     if (gamesToday.length === 0) {
-        return false
+        return false;
     }
 
     return formatGames(leagueId, gamesToday);
@@ -36,4 +32,4 @@ const formatGames = (leagueId, games) => {
     }
 
     return gamesTodayString;
-}
+};

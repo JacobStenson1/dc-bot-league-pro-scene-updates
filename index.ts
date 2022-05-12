@@ -10,7 +10,7 @@ import express, { Request, Response } from 'express';
 // Setup express server so Heroku does not think the node process has crashed
 const PORT = process.env.PORT || 5000;
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use('/', (_: Request, response: Response) => response.sendStatus(200));
 
 const client = new Client({intents: [Intents.FLAGS.GUILD_MESSAGES]});

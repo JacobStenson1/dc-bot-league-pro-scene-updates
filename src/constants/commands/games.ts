@@ -1,2 +1,2 @@
-export const TODAY = 'today'
-export const TOMORROW = 'tomorrow'
+export const TODAY = 'today';
+export const TOMORROW = 'tomorrow';

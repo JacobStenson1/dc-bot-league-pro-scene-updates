@@ -2,7 +2,7 @@ import { Client, Interaction } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import { gamesCommandDefinition, gamesTodayCommandDefinition, leaguesCommandDefinition } from './commands/definitions';
-import { gamesCommandHandler, gamesTodayCommandHandler, leaguesCommandHandler } from './commands/handlers';
+import { gamesCommandHandler, leaguesCommandHandler } from './commands/handlers';
 import { clientId, guildId, IS_DEV, token } from './config';
 
 export default class DiscordBot {
@@ -58,9 +58,6 @@ export default class DiscordBot {
                 break;
             case 'games':
                 await gamesCommandHandler(interaction);
-                break;
-            case 'games_today':
-                await gamesTodayCommandHandler(interaction);
                 break;
         }
 
