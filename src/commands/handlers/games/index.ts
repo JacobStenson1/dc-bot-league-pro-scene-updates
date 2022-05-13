@@ -19,8 +19,8 @@ export default async (interaction: CommandInteraction) => {
     }
 }
 
-const handleGamesToday = (interaction: CommandInteraction, leagueId) => {
-    const gamesToday = getGamesToday(leagueId);
+const handleGamesToday = async (interaction: CommandInteraction, leagueId) => {
+    const gamesToday = await getGamesToday(leagueId);
     return editInteractionReply(interaction, gamesToday);
 };
 
