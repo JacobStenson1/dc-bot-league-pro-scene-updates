@@ -3,6 +3,7 @@ import { TODAY, TOMORROW } from '../../../constants/commands/games';
 import editInteractionReply from '../../../functions/editInteractionReply';
 import getGamesToday from './getGamesToday';
 import getGamesTomorrow from './getGamesTomorrow';
+import { MOMENT_LONDON_TIMEZONE } from '../../../utils/moment';
 
 export default async (interaction: CommandInteraction) => {
     const dayToReturn = interaction.options.getString('day_to_return');
@@ -20,11 +21,22 @@ export default async (interaction: CommandInteraction) => {
 }
 
 const handleGamesToday = async (interaction: CommandInteraction, leagueId) => {
-    const gamesToday = await getGamesToday(leagueId);
+    console.log(`Start today: ${MOMENT_LONDON_TIMEZONE().format('DD/MM/YYYY')}`);
+
+    const gamesToday = await getGamesToday(leagueId, MOMENT_LONDON_TIMEZONE());
     return editInteractionReply(interaction, gamesToday);
 };
 
 const handleGamesTomorrow = async (interaction, leagueId) => {
-    const gamesTomorrow = await getGamesTomorrow(leagueId);
+    const momentTomorrow = MOMENT_LONDON_TIMEZONE().add(1, 'day');
+
+    console.log(`Start tomorrow: ${momentTomorrow.format('DD/MM/YYYY')}`);
+
+    const gamesTomorrow = await getGamesTomorrow(leagueId, momentTomorrow);
+
+    console.log('gamesTomorrow');
+    console.log(gamesTomorrow);
+    if (!gamesTomorrow)
+        return editInteractionReply(interaction, `No games found for: ${momentTomorrow.format('DD/MM/YYYY')}`);
     return editInteractionReply(interaction, gamesTomorrow);
 };

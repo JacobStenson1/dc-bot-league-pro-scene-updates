@@ -6,10 +6,16 @@ import getItemsSpecificDate from '../../../utils/functions/getItemsSpecificDate'
 export default async (leagueId, date: Moment) => {
     const leagueGames = await getAllGamesForLeague(leagueId);
 
+    console.log("date");
+    console.log(date);
+
     // Get the games today, must use "as ScheduleGame[]" as function is a util function and wont return the correct type
     const gamesToday = getItemsSpecificDate(leagueGames.data.schedule.events, 'startTime', date) as ScheduleGame[];
 
     if (gamesToday.length === 0) {
+        console.log('No games found');
+        console.log("gamesToday");
+        console.log(gamesToday);
         return false;
     }
 
